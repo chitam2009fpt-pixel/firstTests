@@ -3,7 +3,7 @@ using OpenQA.Selenium.Chrome;
 
 namespace FirstTests;
 
-public class Tests
+public class Test
 {
     private IWebDriver driver;
 
