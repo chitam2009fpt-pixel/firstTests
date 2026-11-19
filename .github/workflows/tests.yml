@@ -1,0 +1,33 @@
+name: Chay test tu dong
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout ma nguon
+        uses: actions/checkout@v4
+
+      - name: Cai dat .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Khoi phuc dependencies
+        run: dotnet restore
+
+      - name: Chay kiem thu tu dong
+        run: dotnet test --logger "trx" --results-directory ./ketqua --filter "FullyQualifiedName!~SeRot"
+
+      - name: Luu tru bao cao ket qua kiem thu
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ketqua-test
+          path: ./ketqua
