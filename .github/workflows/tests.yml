@@ -1,17 +1,17 @@
 name: Chay test tu dong
 
-on:
+on:                         # KHI NÀO CHẠY
   push:
     branches: [ main ]
-  pull_sequest:
+  pull_request:
     branches: [ main ]
 
 jobs:
   test:
-    runs-on: unbuntu-latest # CHẠY Ở ĐÂU (máy ảo sạch)
+    runs-on: ubuntu-latest  # CHẠY Ở ĐÂU (máy ảo sạch)
     steps:                  # CHẠY NHỮNG GÌ
-      - users: action/checkout@v4
-      - users: action/setup-dotnet@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "9.0.x"
       - run: dotnet restore
